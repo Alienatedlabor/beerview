@@ -1,14 +1,20 @@
+import React from 'react';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Account from './components/Account';
+import { Route, Routes } from 'react-router-dom';
+
 function App() {
   return (
-    <div className="App">
-      <div>
-        <input placeholder="Search for a beer" type="text" />
-      </div>
+    <div>
+      <h1 className="text-center text-3xl font-bold">Sign in or Sign up!</h1>
 
-      <h1>This week's beer:</h1>
-      <div className="weekly-beer-container"></div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/account" element={<Account />} />
+      </Routes>
     </div>
   );
 }
-
 export default App;
