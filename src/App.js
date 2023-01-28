@@ -28,3 +28,6 @@ function App() {
   );
 }
 export default App;
+
+//TODO: add app page to route (protected)
+//TODO: change signIn and signUp to redirect to app homepage
