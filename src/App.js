@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Account from './components/Account';
+import Home from './components/Home';
 import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -9,7 +10,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold">Sign in or Sign up!</h1>
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -22,6 +22,15 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthContextProvider>
     </div>
