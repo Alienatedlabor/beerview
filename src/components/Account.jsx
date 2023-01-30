@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Account = () => {
   const { user, logout } = UserAuth();
@@ -26,6 +26,12 @@ const Account = () => {
       >
         Log out
       </button>
+      <p>
+        {' '}
+        <Link to="/home" className="underline">
+          Back to the homepage
+        </Link>
+      </p>
     </div>
   );
 };
