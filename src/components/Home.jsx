@@ -2,16 +2,20 @@ import Weeklybeer from './Weeklybeer';
 import React from 'react';
 import Nav from './Nav';
 import JudgingForm from './JudgingForm';
+import BeerList from './BeerList';
+
 function Home() {
   return (
     <div>
       <Nav />
       <Weeklybeer />
-      <JudgingForm />
+      <BeerList />
     </div>
   );
 }
 
 export default Home;
 
-// TODO: add a link with which will call navigate('/account')
+{
+  /* <JudgingForm /> */
+}
