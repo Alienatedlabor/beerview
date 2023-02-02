@@ -1,5 +1,4 @@
 export const Entry = ({ label, pointValue, value, onChange, type }) => {
-  console.log(label);
   return (
     <div className="flex gap-2">
       <label className="font-medium text-black">

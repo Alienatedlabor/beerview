@@ -23,14 +23,14 @@ export default function AddBeerModal({ open, onClose }) {
       <div
         className={`fixed inset-0 bg-black ${
           open ? 'opacity-50' : 'pointer-events-none opacity-0'
-        }`}
+        } transition-opacity duration-300 ease-in-out`}
       />
 
       {/* content */}
       <div
         className={`fixed right-0 h-full w-full max-w-screen-sm bg-white p-4 shadow-lg${
           open ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        } transition-opacity duration-300 ease-in-out`}
       >
         <div>
           <button
