@@ -24,7 +24,9 @@ function BeerList() {
   console.log(beers);
   return (
     <div className="grid grid-cols-4 gap-4 ">
-      <h3 className="flex justify-center">Previously Rated Beers</h3>
+      <h3 className="flex align-center justify-center">
+        Previously Rated Beers
+      </h3>
       {beers.map((beer) => (
         <BeerPreview key={beer.name} beer={beer} />
       ))}
