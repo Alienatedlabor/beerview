@@ -1,4 +1,22 @@
-export default function AddBeerModal({ open, onClose, children }) {
+import { Entry } from './Entry';
+
+const ModalForm = () => {
+  return (
+    <div className="flex flex-col justify-center">
+      <form>
+        <Entry type="text" label="Name" />
+        <Entry type="text" label="Brewery" />
+        <Entry type="text" label="Style" />
+        <Entry type="number" label="ABV" />
+      </form>
+      <button className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600">
+        Submit
+      </button>
+    </div>
+  );
+};
+
+export default function AddBeerModal({ open, onClose }) {
   return (
     <div className={`fixed inset-0 ${open ? '' : 'pointer-events-none'}`}>
       {/* backdrop */}
@@ -22,7 +40,7 @@ export default function AddBeerModal({ open, onClose, children }) {
             Click to close
           </button>
         </div>
-        {children}
+        <ModalForm />
       </div>
     </div>
   );

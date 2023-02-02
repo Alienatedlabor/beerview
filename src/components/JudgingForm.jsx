@@ -1,14 +1,5 @@
 import React from 'react';
-const Entry = ({ label, pointValue }) => {
-  return (
-    <div className="flex gap-2">
-      <label className="font-medium">
-        {label} ({pointValue}):
-      </label>
-      <input className="my-1 border" placeholder={label}></input>
-    </div>
-  );
-};
+import { Entry } from './Entry';
 
 function JudgingForm() {
   return (
@@ -21,7 +12,7 @@ function JudgingForm() {
         <Entry label={'Aftertaste'} pointValue={20} />
         <Entry label={'Drinkability'} pointValue={30} />
       </form>
-      <button className="border px-6 py-2 my-4 bg-yellow-500 hover:bg-yellow-600">
+      <button className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600">
         Submit
       </button>
     </div>
