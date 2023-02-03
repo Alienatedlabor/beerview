@@ -44,7 +44,7 @@ function BeerList() {
         Previously Rated Beers
       </h3>
       {beers.map((beer) => (
-        <BeerPreview key={beer.name} beer={beer} />
+        <BeerPreview key={beer.id} beer={beer} />
       ))}
     </div>
   );
