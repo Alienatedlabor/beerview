@@ -3,6 +3,7 @@ import React from 'react';
 import Nav from './Nav';
 import JudgingForm from './JudgingForm';
 import BeerList from './BeerList';
+import Footer from './Footer';
 
 function Home() {
   return (
@@ -10,6 +11,7 @@ function Home() {
       <Nav />
       <Weeklybeer />
       <BeerList />
+      <Footer />
     </div>
   );
 }
