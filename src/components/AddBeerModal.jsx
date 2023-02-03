@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useBeers } from '../context/BeerContext';
 import { Entry } from './Entry';
 
-const ModalForm = () => {
+const ModalForm = ({ onClose }) => {
   const [beerName, setBeerName] = useState('');
   const [beerBrewery, setBeerBrewery] = useState('');
   const [beerStyle, setBeerStyle] = useState('');
   const [beerABV, setBeerABV] = useState(0);
   const { addBeer } = useBeers();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addBeer({
@@ -23,7 +24,9 @@ const ModalForm = () => {
         { aftertaste: 0, appearance: 0, drinkability: 0, smell: 0, taste: 0 },
       ],
     });
+    onClose();
   };
+
   return (
     <div className="flex flex-col justify-center">
       <form onSubmit={handleSubmit}>
@@ -59,6 +62,7 @@ const ModalForm = () => {
           type="number"
           label="ABV"
         />
+
         <button
           type="submit"
           className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
@@ -94,7 +98,7 @@ export default function AddBeerModal({ open, onClose }) {
             Click to close
           </button>
         </div>
-        <ModalForm />
+        <ModalForm onClose={onClose} />
       </div>
     </div>
   );
