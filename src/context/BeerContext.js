@@ -1,5 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getDocs, collection, doc, setDoc, addDoc } from 'firebase/firestore';
+import {
+  getDocs,
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 const BeerContext = createContext();
 
@@ -22,6 +29,13 @@ export const BeerContextProvider = ({ children }) => {
 
   const addBeer = async (beer) => {
     await addDoc(collection(db, 'beers'), beer);
+
+    getBeers();
+  };
+
+  const deleteBeer = async (id) => {
+    await deleteDoc(doc(db, 'beers', id));
+
     getBeers();
   };
 
@@ -29,7 +43,7 @@ export const BeerContextProvider = ({ children }) => {
     getBeers();
   }, []);
   return (
-    <BeerContext.Provider value={{ addBeer, beers }}>
+    <BeerContext.Provider value={{ deleteBeer, addBeer, beers }}>
       {children}
     </BeerContext.Provider>
   );

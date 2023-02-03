@@ -1,4 +1,7 @@
+import { useBeers } from '../context/BeerContext';
+
 const BeerPreview = ({ beer }) => {
+  const { deleteBeer } = useBeers();
   return (
     <div className="mx-4 my-2 flex flex-col">
       <h2 className="font-bold text-black">{beer.name}</h2>
@@ -28,6 +31,12 @@ const BeerPreview = ({ beer }) => {
             <p>Drinkability: {rate.drinkability}</p>
           </div>
         ))}
+      <button
+        onClick={() => deleteBeer(beer.id)}
+        className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+      >
+        Delete this entry
+      </button>
     </div>
   );
 };
