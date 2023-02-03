@@ -29,7 +29,7 @@ export const BeerContextProvider = ({ children }) => {
     getBeers();
   }, []);
   return (
-    <BeerContext.Provider value={{ addBeer, beers, getBeers }}>
+    <BeerContext.Provider value={{ addBeer, beers }}>
       {children}
     </BeerContext.Provider>
   );
