@@ -5,3 +5,5 @@ function Footer() {
 }
 
 export default Footer;
+
+// TODO: make footer

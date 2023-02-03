@@ -23,7 +23,7 @@ const BeerPreview = ({ beer }) => {
 
       {!beer.upForVote &&
         beer.rating.map((rate) => (
-          <div key={beer.name}>
+          <div key={beer.id}>
             <p>Appearance: {rate.appearance}</p>
             <p>Smell: {rate.smell}</p>
             <p>Taste: {rate.taste}</p>
@@ -37,6 +37,7 @@ const BeerPreview = ({ beer }) => {
 
 function BeerList() {
   const { beers } = useBeers();
+
   return (
     <div className="grid grid-cols-4 gap-4 ">
       <h3 className="align-center flex justify-center">
