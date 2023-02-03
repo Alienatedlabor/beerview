@@ -8,13 +8,19 @@ const BeerContext = createContext();
 export const BeerContextProvider = ({ children }) => {
   const [beers, setBeers] = useState([]);
   const getBeers = async () => {
-    const beers = [];
-    const beersCollection = await getDocs(collection(db, 'beers'));
-
-    beersCollection.forEach((beer) => beers.push(beer.data()));
+    let beers = [];
+    try {
+      const beersCollection = await getDocs(collection(db, 'beers'));
+      beers = beersCollection.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+    } catch (err) {
+      console.error(err);
+    }
     return beers;
   };
-
+  console.log(beers);
   useEffect(() => {
     getBeers().then((beers) => setBeers(beers));
   }, []);
