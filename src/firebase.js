@@ -4,7 +4,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,19 +23,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-console.log(analytics);
 //database
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const auth = getAuth(app);
 export default app;
-
-//collections
-export const getBeers = async () => {
-  const beers = [];
-  const beersCollection = await getDocs(collection(db, 'beers'));
-
-  beersCollection.forEach((beer) => beers.push(beer.data()));
-  console.log(beers);
-  return beers;
-};
