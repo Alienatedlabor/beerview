@@ -7,7 +7,7 @@ import AddBeerModal from './AddBeerModal';
 function Weeklybeer() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex flex-col justify-center bg-gray-800 py-32 px-8 text-white">
+    <div className="py-33 flex flex-col justify-center bg-gray-800 px-8 text-white">
       <h1 className="flex items-center justify-center">Vote for a beer:</h1>
       {/* <div>
         <input className="border" placeholder="Search for a beer" type="text" />

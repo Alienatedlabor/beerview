@@ -9,7 +9,7 @@ export const Entry = ({ label, pointValue, value, onChange, type }) => {
         type={type}
         onChange={onChange}
         value={value}
-        className="my-1 border"
+        className="my-1 border text-black"
         placeholder={label}
       ></input>
     </div>

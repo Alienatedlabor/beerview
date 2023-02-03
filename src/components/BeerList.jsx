@@ -3,28 +3,43 @@ import { useBeers } from '../context/BeerContext';
 
 const BeerPreview = ({ beer }) => {
   return (
-    <div className="flex flex-col mx-4 my-2">
-      <h2 className="font-bold">{beer.name}</h2>
-      <p className="font-medium">{beer.style}</p>
-      {beer.rating.map((rate) => (
-        <div key={beer.name}>
-          <p>Appearance: {rate.appearance}</p>
-          <p>Smell: {rate.smell}</p>
-          <p>Taste: {rate.taste}</p>
-          <p>Aftertaste: {rate.aftertaste}</p>
-          <p>Drinkability: {rate.drinkability}</p>
-        </div>
-      ))}
+    <div className="mx-4 my-2 flex flex-col">
+      <h2 className="font-bold text-black">{beer.name}</h2>
+      <div className="flex gap-1">
+        <label htmlFor="">Brewery: </label>
+        <p className=" font-medium text-black">{beer.brewery}</p>
+      </div>
+      <div className="flex gap-1">
+        <label htmlFor="">Style: </label>
+        <p className=" font-medium text-black">{beer.style}</p>
+      </div>
+      <div className="flex gap-1">
+        <label htmlFor="">Alcohol by Volume: </label>
+        <p className=" font-medium text-black">{beer.abv}</p>
+      </div>
+      <h3 className="font-bold">
+        {beer.upForVote === true ? `Votes: ${beer.voteCount}` : ''}
+      </h3>
+
+      {!beer.upForVote &&
+        beer.rating.map((rate) => (
+          <div key={beer.name}>
+            <p>Appearance: {rate.appearance}</p>
+            <p>Smell: {rate.smell}</p>
+            <p>Taste: {rate.taste}</p>
+            <p>Aftertaste: {rate.aftertaste}</p>
+            <p>Drinkability: {rate.drinkability}</p>
+          </div>
+        ))}
     </div>
   );
 };
 
 function BeerList() {
   const { beers } = useBeers();
-  console.log(beers);
   return (
     <div className="grid grid-cols-4 gap-4 ">
-      <h3 className="flex align-center justify-center">
+      <h3 className="align-center flex justify-center">
         Previously Rated Beers
       </h3>
       {beers.map((beer) => (

@@ -1,17 +1,57 @@
+import { useState } from 'react';
 import { Entry } from './Entry';
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
+
 const ModalForm = () => {
+  const [beerName, setBeerName] = useState('');
+  const [beerBrewery, setBeerBrewery] = useState('');
+  const [beerStyle, setBeerStyle] = useState('');
+  const [beerABV, setBeerABV] = useState('');
   return (
     <div className="flex flex-col justify-center">
-      <form>
-        <Entry type="text" label="Name" />
-        <Entry type="text" label="Brewery" />
-        <Entry type="text" label="Style" />
-        <Entry type="number" label="ABV" />
+      <form onSubmit={handleSubmit}>
+        <Entry
+          value={beerName}
+          onChange={(e) => {
+            setBeerName(e.target.value);
+          }}
+          type="text"
+          label="Name"
+        />
+        <Entry
+          value={beerBrewery}
+          onChange={(e) => {
+            setBeerBrewery(e.target.value);
+          }}
+          type="text"
+          label="Brewery"
+        />
+        <Entry
+          value={beerStyle}
+          onChange={(e) => {
+            setBeerStyle(e.target.value);
+          }}
+          type="text"
+          label="Style"
+        />
+        <Entry
+          value={beerABV}
+          onChange={(e) => {
+            setBeerABV(e.target.value);
+          }}
+          type="number"
+          label="ABV"
+        />
+        <button
+          type="submit"
+          className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+        >
+          Submit
+        </button>
       </form>
-      <button className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600">
-        Submit
-      </button>
     </div>
   );
 };
