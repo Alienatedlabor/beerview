@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, doc, setDoc, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 const BeerContext = createContext();
 
-//collections
-
 export const BeerContextProvider = ({ children }) => {
   const [beers, setBeers] = useState([]);
+
   const getBeers = async () => {
     let beers = [];
     try {
@@ -18,14 +17,19 @@ export const BeerContextProvider = ({ children }) => {
     } catch (err) {
       console.error(err);
     }
-    return beers;
+    setBeers(beers);
   };
-  console.log(beers);
+
+  const addBeer = async (beer) => {
+    await addDoc(collection(db, 'beers'), beer);
+    getBeers();
+  };
+
   useEffect(() => {
-    getBeers().then((beers) => setBeers(beers));
+    getBeers();
   }, []);
   return (
-    <BeerContext.Provider value={{ beers, getBeers }}>
+    <BeerContext.Provider value={{ addBeer, beers, getBeers }}>
       {children}
     </BeerContext.Provider>
   );

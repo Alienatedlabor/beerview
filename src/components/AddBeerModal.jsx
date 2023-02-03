@@ -1,15 +1,29 @@
 import { useState } from 'react';
+import { useBeers } from '../context/BeerContext';
 import { Entry } from './Entry';
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
 
 const ModalForm = () => {
   const [beerName, setBeerName] = useState('');
   const [beerBrewery, setBeerBrewery] = useState('');
   const [beerStyle, setBeerStyle] = useState('');
-  const [beerABV, setBeerABV] = useState('');
+  const [beerABV, setBeerABV] = useState(0);
+  const { addBeer } = useBeers();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addBeer({
+      name: beerName,
+      brewery: beerBrewery,
+      abv: beerABV,
+      style: beerStyle,
+      hasRating: false,
+      iconurl: '',
+      upForVote: true,
+      voteCount: 0,
+      rating: [
+        { aftertaste: 0, appearance: 0, drinkability: 0, smell: 0, taste: 0 },
+      ],
+    });
+  };
   return (
     <div className="flex flex-col justify-center">
       <form onSubmit={handleSubmit}>
@@ -40,7 +54,7 @@ const ModalForm = () => {
         <Entry
           value={beerABV}
           onChange={(e) => {
-            setBeerABV(e.target.value);
+            setBeerABV(Number(e.target.value));
           }}
           type="number"
           label="ABV"
