@@ -6,13 +6,20 @@ function BeerList() {
   const { beers } = useBeers();
 
   return (
-    <div className="grid grid-cols-4 gap-4 ">
-      <h3 className="align-center flex justify-center">
+    <div className="bg-gray-800">
+      <h3 className="align-center flex justify-center text-white">
         Previously Rated Beers
       </h3>
-      {beers.map(
-        (beer) => beer.hasRating && <BeerPreview key={beer.id} beer={beer} />
-      )}
+      <div className="mx-3 my-2 grid grid-cols-4 gap-4 ">
+        {beers.map(
+          (beer) =>
+            beer.hasRating && (
+              <div className="bg-gray-300 ">
+                <BeerPreview key={beer.id} beer={beer} />
+              </div>
+            )
+        )}
+      </div>
     </div>
   );
 }
