@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className=" flex justify-center text-white">
+    <div className=" flex justify-center text-white hover:underline">
       <a
         href="https://github.com/Alienatedlabor"
         target="_blank"
@@ -15,5 +15,3 @@ function Footer() {
 }
 
 export default Footer;
-
-// TODO: make footer
