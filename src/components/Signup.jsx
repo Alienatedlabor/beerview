@@ -26,7 +26,7 @@ const Signup = () => {
   return (
     <div className="max-w[700px] mx-auto my-16 p-4">
       <div>
-        <h1 className="text-2xl font-bold py-2">
+        <h1 className="py-2 text-2xl font-bold">
           Sign up for beerview for free!
         </h1>
       </div>
@@ -48,7 +48,7 @@ const Signup = () => {
             type="password"
           />
         </div>
-        <button className="border border-yellow-500 bg-yellow-500 hover:bg-yellow-600 w-full p-4 my-2 font-semibold">
+        <button className="my-2 w-full border border-yellow-500 bg-yellow-500 p-4 font-semibold hover:bg-yellow-600">
           Sign Up
         </button>
       </form>
