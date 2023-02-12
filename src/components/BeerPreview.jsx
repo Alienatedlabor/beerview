@@ -17,7 +17,7 @@ const BeerPreview = ({ beer }) => {
       </div>
       <div className="flex gap-1">
         <label htmlFor="">Alcohol by Volume: </label>
-        <p className=" font-medium text-black">{beer.abv}</p>
+        <p className=" font-medium text-black">{beer.abv}%</p>
       </div>
       <h3 className="font-bold">
         {beer.upForVote === true ? `Votes: ${beer.voteCount}` : ''}
