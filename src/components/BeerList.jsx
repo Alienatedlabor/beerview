@@ -14,7 +14,7 @@ function BeerList() {
         {beers.map(
           (beer) =>
             beer.hasRating && (
-              <div className="bg-gray-300 ">
+              <div key={beer.id} className="bg-gray-300 ">
                 <BeerPreview key={beer.id} beer={beer} />
               </div>
             )

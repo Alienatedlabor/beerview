@@ -1,7 +1,9 @@
+import { updatePhoneNumber } from 'firebase/auth';
+import { increment } from 'firebase/firestore';
 import { useBeers } from '../context/BeerContext';
 
 const BeerPreview = ({ beer }) => {
-  const { deleteBeer } = useBeers();
+  const { deleteBeer, updateBeer } = useBeers();
   return (
     <div className="mx-4 my-2 flex flex-col">
       <h2 className="font-bold text-black">{beer.name}</h2>
@@ -37,6 +39,15 @@ const BeerPreview = ({ beer }) => {
       >
         Delete this entry
       </button>
+
+      {!beer.hasRating && (
+        <button
+          onClick={() => updateBeer(beer.id, { voteCount: increment(1) })}
+          className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+        >
+          Vote for this entry
+        </button>
+      )}
     </div>
   );
 };

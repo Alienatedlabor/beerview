@@ -6,6 +6,7 @@ import {
   setDoc,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 const BeerContext = createContext();
@@ -39,11 +40,17 @@ export const BeerContextProvider = ({ children }) => {
     getBeers();
   };
 
+  const updateBeer = async (id, beer) => {
+    await updateDoc(doc(db, 'beers', id), beer);
+
+    getBeers();
+  };
+
   useEffect(() => {
     getBeers();
   }, []);
   return (
-    <BeerContext.Provider value={{ deleteBeer, addBeer, beers }}>
+    <BeerContext.Provider value={{ deleteBeer, addBeer, updateBeer, beers }}>
       {children}
     </BeerContext.Provider>
   );
