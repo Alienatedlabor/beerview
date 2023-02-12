@@ -14,7 +14,7 @@ function App() {
       <AuthContextProvider>
         <BeerContextProvider>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route
               path="/account"
@@ -26,7 +26,7 @@ function App() {
             ></Route>
 
             <Route
-              path="/home"
+              path="/"
               element={
                 <ProtectedRoute>
                   <Home />
