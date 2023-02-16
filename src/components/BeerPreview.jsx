@@ -1,4 +1,3 @@
-import { updatePhoneNumber } from 'firebase/auth';
 import { increment } from 'firebase/firestore';
 import { useBeers } from '../context/BeerContext';
 
