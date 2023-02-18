@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useBeers } from '../context/BeerContext';
 import { Entry } from './Entry';
+import { UserAuth } from '../context/AuthContext';
 
 const ModalForm = ({ onClose }) => {
   const [beerName, setBeerName] = useState('');
@@ -8,7 +9,7 @@ const ModalForm = ({ onClose }) => {
   const [beerStyle, setBeerStyle] = useState('');
   const [beerABV, setBeerABV] = useState(0);
   const { addBeer } = useBeers();
-
+  const { user } = UserAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     addBeer({
