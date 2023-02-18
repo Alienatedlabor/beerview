@@ -7,6 +7,7 @@ import {
   addDoc,
   deleteDoc,
   updateDoc,
+  onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 const BeerContext = createContext();
