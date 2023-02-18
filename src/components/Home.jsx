@@ -1,7 +1,6 @@
 import Weeklybeer from './Weeklybeer';
 import React from 'react';
 import Nav from './Nav';
-import JudgingForm from './JudgingForm';
 import BeerList from './BeerList';
 import Footer from './Footer';
 
@@ -17,7 +16,3 @@ function Home() {
 }
 
 export default Home;
-
-{
-  /* <JudgingForm /> */
-}
