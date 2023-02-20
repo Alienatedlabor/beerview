@@ -15,6 +15,7 @@ const UserDataContext = createContext();
 
 export const UserDataContextProvider = ({ children }) => {
   const { user } = UserAuth();
+
   const [users, setUsers] = useState([]);
   const addUser = async (user) => {
     await addDoc(collection(db, 'users'), user);
