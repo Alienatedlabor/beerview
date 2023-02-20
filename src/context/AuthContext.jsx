@@ -4,16 +4,29 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser = (email, password, displayName) => {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (userData) => {
+        const user = userData.user;
+        return updateProfile(user, {
+          displayName: displayName,
+        }).then(
+          setDoc(doc(db, 'users', user.uid), {
+            username: displayName,
+          })
+        );
+      }
+    );
   };
 
   const signIn = (email, password) => {
@@ -44,6 +57,10 @@ export const AuthContextProvider = ({ children }) => {
 export const UserAuth = () => {
   return useContext(UserContext);
 };
+
+// TODO: sync user deletion to corresponding database entry deletion????
+// TODO: add displayname to database doc on signup
+
 // context overview
 // In React, context is a way to share data that can be considered "global" for a tree of React components, without having to pass the data down through props at every level.
 
