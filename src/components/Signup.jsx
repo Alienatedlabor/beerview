@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import { Entry } from './Entry';
 
 // component
 const Signup = () => {
@@ -9,14 +10,15 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const [displayName, setDisplayName] = useState('');
   const { createUser } = UserAuth();
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      await createUser(email, password);
+      await createUser(email, password, displayName);
       navigate('/');
     } catch (e) {
       setError(e.message);
@@ -35,19 +37,33 @@ const Signup = () => {
         <div className="flex flex-col py-2">
           <label className="py-2 font-medium">Email Address</label>
           <input
+            required
             onChange={(e) => setEmail(e.target.value)}
             className="border p-3"
             type="email"
           />
         </div>
+
         <div className="flex flex-col py-2">
           <label className="py-2font-medium">Password</label>
           <input
+            required
             onChange={(e) => setPassword(e.target.value)}
             className="border p-3"
             type="password"
           />
         </div>
+
+        <div className="flex flex-col py-2">
+          <label className='"py-2font-medium"'>Display Name</label>
+          <input
+            required
+            className="border p-3"
+            type="text"
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
+        </div>
+
         <button className="my-2 w-full border border-yellow-500 bg-yellow-500 p-4 font-semibold hover:bg-yellow-600">
           Sign Up
         </button>
