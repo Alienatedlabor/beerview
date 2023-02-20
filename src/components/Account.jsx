@@ -20,6 +20,7 @@ const Account = () => {
     <div className="mx-auto my-16 max-w-[600px] p-4">
       <h1 className="py-4 text-2xl font-bold">Account</h1>
       <p>Email: {user && user.email}</p>
+      <p>Display Name: {user && user.displayName}</p>
       <button
         onClick={handleLogout}
         className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
