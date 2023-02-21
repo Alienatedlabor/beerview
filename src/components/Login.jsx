@@ -24,13 +24,14 @@ const Login = () => {
   return (
     <div className="max-w[700px] mx-auto my-16 p-4">
       <div>
-        <h1 className="text-2xl font-bold py-2">Sign in to your account</h1>
+        <h1 className="py-2 text-2xl font-bold">Sign in to your account</h1>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col py-2">
           <label className="py-2 font-medium">Email Address</label>
           <input
+            required
             onChange={(e) => setEmail(e.target.value)}
             className="border p-3"
             type="email"
@@ -39,12 +40,13 @@ const Login = () => {
         <div className="flex flex-col py-2">
           <label className="py-2font-medium">Password</label>
           <input
+            required
             onChange={(e) => setPassword(e.target.value)}
             className="border p-3"
             type="password"
           />
         </div>
-        <button className="border border-yellow-500 bg-yellow-500 hover:bg-yellow-600 w-full p-4 my-2 font-semibold">
+        <button className="my-2 w-full border border-yellow-500 bg-yellow-500 p-4 font-semibold hover:bg-yellow-600">
           Sign In
         </button>
       </form>
@@ -59,3 +61,5 @@ const Login = () => {
 };
 
 export default Login;
+
+// TODO: add error popups
