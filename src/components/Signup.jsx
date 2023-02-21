@@ -81,4 +81,4 @@ const Signup = () => {
 
 export default Signup;
 
-// TODO:add error pop-ups
+//TODO: no duplicate display names

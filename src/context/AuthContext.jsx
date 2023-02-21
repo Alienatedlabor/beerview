@@ -78,9 +78,6 @@ export const UserAuth = () => {
   return useContext(UserContext);
 };
 
-// TODO: sync user deletion to corresponding database entry deletion????
-// TODO: add displayname to database doc on signup
-
 // context overview
 // In React, context is a way to share data that can be considered "global" for a tree of React components, without having to pass the data down through props at every level.
 
