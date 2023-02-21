@@ -63,5 +63,4 @@ const Login = () => {
 
 export default Login;
 
-// TODO: add error popups
 //TODO: add loadingState animation

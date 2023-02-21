@@ -62,4 +62,3 @@ const Account = () => {
 };
 
 export default Account;
-// TODO: add delete account button (and make it work) check here: https://firebase.google.com/support/privacy/clear-export-data
