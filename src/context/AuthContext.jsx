@@ -5,9 +5,10 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  deleteUser,
 } from 'firebase/auth';
 import { auth, db } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 
 const UserContext = createContext();
 
@@ -37,6 +38,23 @@ export const AuthContextProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const userDelete = async (user) => {
+    await deleteUser(user)
+      .then(() => {
+        alert(`user has been deleted`);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(
+          'There was an issue deleting, contact administrator to ensure deletion'
+        );
+      });
+  };
+
+  const deleteUserData = async (uid) => {
+    await deleteDoc(doc(db, 'users', uid));
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -48,7 +66,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ createUser, user, logout, signIn }}>
+    <UserContext.Provider
+      value={{ createUser, user, logout, signIn, userDelete, deleteUserData }}
+    >
       {children}
     </UserContext.Provider>
   );

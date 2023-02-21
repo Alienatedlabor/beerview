@@ -3,7 +3,7 @@ import { UserAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Account = () => {
-  const { user, logout } = UserAuth();
+  const { user, logout, userDelete, deleteUserData } = UserAuth();
 
   const navigate = useNavigate();
 
@@ -13,6 +13,15 @@ const Account = () => {
       navigate('/login');
     } catch (e) {
       console.log(e.message);
+    }
+  };
+
+  const handleAccountDeletion = async () => {
+    try {
+      await deleteUserData(user.uid);
+      await userDelete(user);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -27,6 +36,12 @@ const Account = () => {
       >
         Log out
       </button>
+      <button
+        onClick={handleAccountDeletion}
+        className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+      >
+        Delete Account and All User Data
+      </button>
       <p>
         {' '}
         <Link to="/" className="underline">
@@ -38,3 +53,4 @@ const Account = () => {
 };
 
 export default Account;
+// TODO: add delete account button (and make it work) check here: https://firebase.google.com/support/privacy/clear-export-data
