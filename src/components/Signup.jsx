@@ -67,6 +67,7 @@ const Signup = () => {
         <button className="my-2 w-full border border-yellow-500 bg-yellow-500 p-4 font-semibold hover:bg-yellow-600">
           Sign Up
         </button>
+        <span className=" border-red-800 p-2 text-red-800">{error}</span>
       </form>
       <p className="py-2">
         Already have an account?{' '}

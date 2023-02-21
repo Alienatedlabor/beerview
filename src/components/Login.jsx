@@ -49,6 +49,7 @@ const Login = () => {
         <button className="my-2 w-full border border-yellow-500 bg-yellow-500 p-4 font-semibold hover:bg-yellow-600">
           Sign In
         </button>
+        <span className=" border-red-800 p-2 text-red-800">{error}</span>
       </form>
       <p className="py-2">
         Don't have an account?{' '}
@@ -63,3 +64,4 @@ const Login = () => {
 export default Login;
 
 // TODO: add error popups
+//TODO: add loadingState animation
