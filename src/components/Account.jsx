@@ -1,6 +1,7 @@
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 
 const Account = () => {
   const { user, logout, userDelete, deleteUserData } = UserAuth();
@@ -17,7 +18,15 @@ const Account = () => {
   };
 
   const handleAccountDeletion = async () => {
+    const userProvidedPassword = prompt(
+      'confirm deletion by entering your password'
+    );
     try {
+      const credential = EmailAuthProvider.credential(
+        user.email,
+        userProvidedPassword
+      );
+      await reauthenticateWithCredential(user, credential);
       await deleteUserData(user.uid);
       await userDelete(user);
     } catch (error) {
