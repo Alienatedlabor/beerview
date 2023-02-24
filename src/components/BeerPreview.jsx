@@ -1,8 +1,25 @@
 import { increment } from 'firebase/firestore';
 import { useBeers } from '../context/BeerContext';
+import { UserAuth } from '../context/AuthContext';
 
 const BeerPreview = ({ beer }) => {
+  const { user } = UserAuth();
   const { deleteBeer, updateBeer } = useBeers();
+
+  const handleVote = () => {
+    console.log(user.uid);
+    console.log(beer.usersWhoHaveVoted);
+    if (beer.usersWhoHaveVoted.includes(user.uid)) {
+      return;
+    }
+    updateBeer(beer.id, {
+      voteCount: increment(1),
+      usersWhoHaveVoted: [...beer.usersWhoHaveVoted, user.uid],
+    });
+  };
+
+  // usersWhoHaveVoted is being stored as a string, I believe that is why the if block/includes method doesn't work
+
   return (
     <div className="mx-4 my-2 flex flex-col">
       <h2 className="font-bold text-black">{beer.name}</h2>
@@ -32,6 +49,7 @@ const BeerPreview = ({ beer }) => {
             <p>Drinkability: {rate.drinkability}</p>
           </div>
         ))}
+
       <button
         onClick={() => deleteBeer(beer.id)}
         className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
@@ -41,7 +59,7 @@ const BeerPreview = ({ beer }) => {
 
       {!beer.hasRating && (
         <button
-          onClick={() => updateBeer(beer.id, { voteCount: increment(1) })}
+          onClick={handleVote}
           className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
         >
           Vote for this entry
