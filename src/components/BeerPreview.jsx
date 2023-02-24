@@ -10,9 +10,13 @@ const BeerPreview = ({ beer }) => {
     if (hasVoted) {
       return;
     }
+    const usersWhoHaveVoted = beer.usersWhoHaveVoted || [];
+
+    usersWhoHaveVoted.push(user.uid);
+
     updateBeer(beer.id, {
       voteCount: increment(1),
-      usersWhoHaveVoted: [...beer.usersWhoHaveVoted, user.uid],
+      usersWhoHaveVoted,
     });
   };
 
