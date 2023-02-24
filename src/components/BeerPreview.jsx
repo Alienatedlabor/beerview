@@ -20,8 +20,6 @@ const BeerPreview = ({ beer }) => {
     });
   };
 
-  // usersWhoHaveVoted is being stored as a string, I believe that is why the if block/includes method doesn't work
-
   return (
     <div className="mx-4 my-2 flex flex-col">
       <h2 className="font-bold text-black">{beer.name}</h2>
