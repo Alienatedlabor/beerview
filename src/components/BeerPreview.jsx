@@ -5,11 +5,13 @@ import { UserAuth } from '../context/AuthContext';
 const BeerPreview = ({ beer }) => {
   const { user } = UserAuth();
   const { deleteBeer, updateBeer } = useBeers();
+  //optional chaining: ?. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining checks if property exists, short circuits if not
   const hasVoted = beer?.usersWhoHaveVoted?.includes(user.uid);
   const handleVote = () => {
     if (hasVoted) {
       return;
     }
+    //making sure that usersWhoHaveVoted won't be undefined for beers that have no votes.
     const usersWhoHaveVoted = beer.usersWhoHaveVoted || [];
 
     usersWhoHaveVoted.push(user.uid);
