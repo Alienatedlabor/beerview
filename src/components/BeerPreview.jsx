@@ -5,11 +5,9 @@ import { UserAuth } from '../context/AuthContext';
 const BeerPreview = ({ beer }) => {
   const { user } = UserAuth();
   const { deleteBeer, updateBeer } = useBeers();
-
+  const hasVoted = beer?.usersWhoHaveVoted?.includes(user.uid);
   const handleVote = () => {
-    console.log(user.uid);
-    console.log(beer.usersWhoHaveVoted);
-    if (beer.usersWhoHaveVoted.includes(user.uid)) {
+    if (hasVoted) {
       return;
     }
     updateBeer(beer.id, {
@@ -24,15 +22,15 @@ const BeerPreview = ({ beer }) => {
     <div className="mx-4 my-2 flex flex-col">
       <h2 className="font-bold text-black">{beer.name}</h2>
       <div className="flex gap-1">
-        <label htmlFor="">Brewery: </label>
+        <label>Brewery: </label>
         <p className=" font-medium text-black">{beer.brewery}</p>
       </div>
       <div className="flex gap-1">
-        <label htmlFor="">Style: </label>
+        <label>Style: </label>
         <p className=" font-medium text-black">{beer.style}</p>
       </div>
       <div className="flex gap-1">
-        <label htmlFor="">Alcohol by Volume: </label>
+        <label>Alcohol by Volume: </label>
         <p className=" font-medium text-black">{beer.abv}%</p>
       </div>
       <h3 className="font-bold">
@@ -59,10 +57,11 @@ const BeerPreview = ({ beer }) => {
 
       {!beer.hasRating && (
         <button
+          disabled={hasVoted}
           onClick={handleVote}
           className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
         >
-          Vote for this entry
+          {hasVoted ? "You've already voted!" : 'Vote for this entry'}
         </button>
       )}
     </div>
