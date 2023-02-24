@@ -78,14 +78,14 @@ export const UserAuth = () => {
   return useContext(UserContext);
 };
 
-// context overview
+// context overview (chatGPT)
 // In React, context is a way to share data that can be considered "global" for a tree of React components, without having to pass the data down through props at every level.
 
 // A React context is created using the createContext method, and it can be accessed within a component using the useContext hook or the Context.Consumer component. The data that is shared via context is specified as the value prop of a Context.Provider component, which is placed higher up in the component tree.
 
 // Context is often used for values that are considered "global" for an application, such as the currently authenticated user, the theme, or the language. By using context, you can avoid having to pass the same data down through many levels of nested components via props.
 
-// code breakdown
+// code breakdown(chatGPT)
 // This code defines a React context for authentication. The AuthContextProvider component provides the context with values for the current user, functions for creating a user, signing in, and signing out, and a useEffect hook that listens to changes in the authentication state.
 
 // createContext is used to create the UserContext object, which is used to share data across multiple components in the React app.
