@@ -53,7 +53,7 @@ const BeerPreview = ({ beer }) => {
         ))}
 
       <button
-        onClick={() => deleteBeer(beer.id)}
+        onClick={() => deleteBeer(beer.id, beer.owner)}
         className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
       >
         Delete this entry
@@ -73,3 +73,6 @@ const BeerPreview = ({ beer }) => {
 };
 
 export default BeerPreview;
+
+//TODO: add rules for deletion: one should only be able to delete the beers that they themselves added using the delete button.
+//TODO: add logic for concluding voting phase. (all users must vote?)

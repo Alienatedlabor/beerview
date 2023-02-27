@@ -10,16 +10,21 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { UserAuth } from '../context/AuthContext';
 const BeerContext = createContext();
 
 export const BeerContextProvider = ({ children }) => {
+  const { user } = UserAuth();
   const [beers, setBeers] = useState([]);
 
   const addBeer = async (beer) => {
     await addDoc(collection(db, 'beers'), beer);
   };
 
-  const deleteBeer = async (id) => {
+  const deleteBeer = async (id, owner) => {
+    if (user.uid !== owner || owner === undefined) {
+      return;
+    }
     await deleteDoc(doc(db, 'beers', id));
   };
 
