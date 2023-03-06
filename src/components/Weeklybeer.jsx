@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { useBeers } from '../context/BeerContext';
 import AddBeerModal from './AddBeerModal';
 import BeerPreview from './BeerPreview';
+import Checkboxes from './Checkboxes';
 // Each beer is added to the database through the add for voting form-
 // they have an empty Ratings array object to begin
 
@@ -31,6 +32,7 @@ function Weeklybeer() {
       >
         Add Beer for Voting
       </button>
+      <Checkboxes />
     </div>
   );
 }
