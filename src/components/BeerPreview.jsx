@@ -3,7 +3,7 @@ import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
 
 const BeerPreview = ({ beer }) => {
-  const { user } = UserAuth();
+  const { user, updateUser } = UserAuth();
   const { deleteBeer, updateBeer } = useBeers();
   //optional chaining: ?. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining checks if property exists, short circuits if not
   const hasVoted = beer?.usersWhoHaveVoted?.includes(user.uid);
@@ -19,6 +19,9 @@ const BeerPreview = ({ beer }) => {
     updateBeer(beer.id, {
       voteCount: increment(1),
       usersWhoHaveVoted,
+    });
+    updateUser(user.uid, {
+      hasVoted: true,
     });
   };
 
@@ -76,5 +79,4 @@ const BeerPreview = ({ beer }) => {
 
 export default BeerPreview;
 
-//TODO: add rules for deletion: one should only be able to delete the beers that they themselves added using the delete button.
 //TODO: add logic for concluding voting phase. (all users must vote?)
