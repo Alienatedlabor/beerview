@@ -8,7 +8,7 @@ import {
   deleteUser,
 } from 'firebase/auth';
 import { auth, db } from '../firebase';
-import { deleteDoc, doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
 
 const UserContext = createContext();
 
@@ -29,7 +29,10 @@ export const AuthContextProvider = ({ children }) => {
       }
     );
   };
-
+  const updateUser = async (uid, updateData) => {
+    let docRef = doc(db, 'users', uid);
+    await updateDoc(docRef, updateData);
+  };
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -67,7 +70,15 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ createUser, user, logout, signIn, userDelete, deleteUserData }}
+      value={{
+        createUser,
+        user,
+        logout,
+        signIn,
+        userDelete,
+        deleteUserData,
+        updateUser,
+      }}
     >
       {children}
     </UserContext.Provider>
