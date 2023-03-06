@@ -62,3 +62,4 @@ const Account = () => {
 };
 
 export default Account;
+// TODO: make it so that you can't have the same display name as someone else
