@@ -2,7 +2,7 @@ export const Entry = ({ label, pointValue, value, onChange, type }) => {
   return (
     <div className="flex gap-2">
       <label className="font-medium text-black">
-        {label} {!pointValue ? '' : `(${pointValue})`}:
+        {!label ? '' : `${label}`} {!pointValue ? '' : `(${pointValue})`}:
       </label>
       <input
         max={type === 'number' ? pointValue : undefined}
