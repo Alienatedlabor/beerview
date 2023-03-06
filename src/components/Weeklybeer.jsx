@@ -13,9 +13,6 @@ function Weeklybeer() {
       <h1 className="flex items-center justify-center text-white">
         Vote for a beer:
       </h1>
-      {/* <div>
-        <input className="border" placeholder="Search for a beer" type="text" />
-      </div> */}
 
       <AddBeerModal open={open} onClose={() => setOpen(false)} />
 

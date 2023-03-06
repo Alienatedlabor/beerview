@@ -70,10 +70,8 @@ export const AuthContextProvider = ({ children }) => {
       id: doc.id,
       ...doc.data(),
     }));
-    console.log(userList);
+    return userList;
   };
-
-  getUserList();
 
   const deleteUserData = async (uid) => {
     await deleteDoc(doc(db, 'users', uid));
@@ -99,6 +97,7 @@ export const AuthContextProvider = ({ children }) => {
         userDelete,
         deleteUserData,
         updateUser,
+        getUserList,
       }}
     >
       {children}
