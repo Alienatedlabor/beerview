@@ -7,21 +7,12 @@ const Checkboxes = () => {
   const [userList, setUserList] = useState([]);
   const [checked, setChecked] = useState(false);
   const { getUserList, user, updateUser } = UserAuth();
+
   const handleCheck = (isChecked) => {
     setChecked(isChecked);
-    console.log(isChecked);
-    //check doesnt work and also I think it's backwards- I need value of databse to determine value of isChecked, I think
-
-    if (isChecked === true) {
-      updateUser(user.uid, {
-        finishedVoting: true,
-      });
-      if (isChecked === false) {
-        updateUser(user.uid, {
-          finishedVoting: false,
-        });
-      }
-    }
+    updateUser(user.uid, {
+      finishedVoting: isChecked,
+    });
   };
 
   useEffect(() => {
