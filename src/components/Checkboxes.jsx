@@ -19,7 +19,7 @@ const Checkboxes = () => {
             label={u.username}
             type="checkbox"
             onChange={(e) => handleCheck(e.target.checked)}
-            disabled={user.uid !== u.id}
+            disabled={user.uid !== u.id || !u.hasVoted}
             value={u.finishedVoting}
           />
         </div>
