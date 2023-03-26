@@ -76,7 +76,8 @@ export const AuthContextProvider = ({ children }) => {
   const getUserData = async (uid) => {
     const userRef = doc(db, 'users', uid);
     const querySnapshot = await getDoc(userRef);
-    console.log(querySnapshot);
+    const userData = querySnapshot.data();
+    return userData;
   };
 
   const deleteUserData = async (uid) => {
