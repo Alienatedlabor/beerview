@@ -119,8 +119,8 @@ export const AuthContextProvider = ({ children }) => {
         userDelete,
         deleteUserData,
         updateUser,
-        getUserList,
-        getUserData,
+        // getUserList,
+        // getUserData,
         userList,
       }}
     >
