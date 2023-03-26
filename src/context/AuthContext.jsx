@@ -14,6 +14,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  onSnapshot,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
@@ -22,6 +23,7 @@ const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [userList, setUserList] = useState([]);
 
   const createUser = (email, password, displayName) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -64,21 +66,22 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  const getUserList = async () => {
-    const querySnapshot = await getDocs(collection(db, 'users'));
-    const userList = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    return userList;
-  };
+  // const getUserList = async () => {
+  //   const querySnapshot = await getDocs(collection(db, 'users'));
+  //   const userList = querySnapshot.docs.map((doc) => ({
+  //     id: doc.id,
+  //     ...doc.data(),
+  //   }));
+  //   return userList;
+  // };
 
-  const getUserData = async (uid) => {
-    const userRef = doc(db, 'users', uid);
-    const querySnapshot = await getDoc(userRef);
-    const userData = querySnapshot.data();
-    return userData;
-  };
+  // const getUserData = async (uid) => {
+  //   const userRef = doc(db, 'users', uid);
+  //   const querySnapshot = await getDoc(userRef);
+  //   const userData = querySnapshot.data();
+  //   console.log(userData);
+  //   return userData;
+  // };
 
   const deleteUserData = async (uid) => {
     await deleteDoc(doc(db, 'users', uid));
@@ -94,6 +97,18 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'users'), (snapshot) => {
+      const users = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setUserList(users);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -106,6 +121,7 @@ export const AuthContextProvider = ({ children }) => {
         updateUser,
         getUserList,
         getUserData,
+        userList,
       }}
     >
       {children}

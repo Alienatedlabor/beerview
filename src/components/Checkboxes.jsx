@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Entry } from './Entry';
 import { UserAuth } from '../context/AuthContext';
-import { useEffect } from 'react';
 
 const Checkboxes = () => {
-  const [userList, setUserList] = useState([]);
-  const [checked, setChecked] = useState(false);
-  const { getUserList, user, updateUser, getUserData } = UserAuth();
+  const { user, updateUser, userList } = UserAuth();
 
-  const handleCheck = (isChecked) => {
-    setChecked(isChecked);
+  const handleCheck = (value) => {
     updateUser(user.uid, {
-      finishedVoting: isChecked,
+      finishedVoting: value,
     });
   };
-
-  useEffect(() => {
-    // runs getUserList and passes the result to the state
-    getUserList().then(setUserList);
-  }, []);
-  getUserData(user.uid);
 
   return (
     <div className="mx-1 my-4 flex justify-center gap-6 ">
@@ -30,7 +20,7 @@ const Checkboxes = () => {
             type="checkbox"
             onChange={(e) => handleCheck(e.target.checked)}
             disabled={user.uid !== u.id}
-            value={checked}
+            value={u.finishedVoting}
           />
         </div>
       ))}
