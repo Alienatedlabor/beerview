@@ -12,8 +12,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
-  getDocs,
   onSnapshot,
   setDoc,
   updateDoc,
@@ -66,23 +64,6 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  // const getUserList = async () => {
-  //   const querySnapshot = await getDocs(collection(db, 'users'));
-  //   const userList = querySnapshot.docs.map((doc) => ({
-  //     id: doc.id,
-  //     ...doc.data(),
-  //   }));
-  //   return userList;
-  // };
-
-  // const getUserData = async (uid) => {
-  //   const userRef = doc(db, 'users', uid);
-  //   const querySnapshot = await getDoc(userRef);
-  //   const userData = querySnapshot.data();
-  //   console.log(userData);
-  //   return userData;
-  // };
-
   const deleteUserData = async (uid) => {
     await deleteDoc(doc(db, 'users', uid));
   };
@@ -119,8 +100,6 @@ export const AuthContextProvider = ({ children }) => {
         userDelete,
         deleteUserData,
         updateUser,
-        // getUserList,
-        // getUserData,
         userList,
       }}
     >
