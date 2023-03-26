@@ -11,6 +11,11 @@ const Checkboxes = () => {
     });
   };
 
+  const isVotingFinished = () => {
+    const allVoted = userList.every((u) => u.finishedVoting && u.hasVoted);
+    return allVoted;
+  };
+
   return (
     <div className="mx-1 my-4 flex justify-center gap-6 ">
       {userList.map((u) => (
