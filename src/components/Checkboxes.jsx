@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const Checkboxes = () => {
   const [userList, setUserList] = useState([]);
   const [checked, setChecked] = useState(false);
-  const { getUserList, user, updateUser } = UserAuth();
+  const { getUserList, user, updateUser, getUserData } = UserAuth();
 
   const handleCheck = (isChecked) => {
     setChecked(isChecked);
@@ -19,6 +19,7 @@ const Checkboxes = () => {
     // runs getUserList and passes the result to the state
     getUserList().then(setUserList);
   }, []);
+  getUserData(user.uid);
 
   return (
     <div className="mx-1 my-4 flex justify-center gap-6 ">

@@ -12,6 +12,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   setDoc,
   updateDoc,
@@ -72,6 +73,12 @@ export const AuthContextProvider = ({ children }) => {
     return userList;
   };
 
+  const getUserData = async (uid) => {
+    const userRef = doc(db, 'users', uid);
+    const querySnapshot = await getDoc(userRef);
+    console.log(querySnapshot);
+  };
+
   const deleteUserData = async (uid) => {
     await deleteDoc(doc(db, 'users', uid));
   };
@@ -97,6 +104,7 @@ export const AuthContextProvider = ({ children }) => {
         deleteUserData,
         updateUser,
         getUserList,
+        getUserData,
       }}
     >
       {children}
