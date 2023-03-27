@@ -18,5 +18,3 @@ function Nav() {
 }
 
 export default Nav;
-
-//TODO: upload logo image?

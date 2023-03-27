@@ -78,5 +78,3 @@ const BeerPreview = ({ beer }) => {
 };
 
 export default BeerPreview;
-
-//TODO: add logic for concluding voting phase. (all users must vote?)
