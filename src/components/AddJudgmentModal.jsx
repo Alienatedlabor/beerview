@@ -48,3 +48,4 @@ export default function AddJudgmentModal({ open, onClose }) {
 }
 
 // TODO: get form submitting ratings after voting system is finished
+//TODO: add comments field to beer/rating
