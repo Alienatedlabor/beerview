@@ -1,4 +1,6 @@
-import { React, useState } from 'react';
+import { async } from '@firebase/util';
+import { React, useEffect, useState } from 'react';
+import { UserAuth } from '../context/AuthContext';
 import { useBeers } from '../context/BeerContext';
 import AddBeerModal from './AddBeerModal';
 import BeerPreview from './BeerPreview';
@@ -8,7 +10,19 @@ import Checkboxes from './Checkboxes';
 
 function Weeklybeer() {
   const [open, setOpen] = useState(false);
+
   const { beers } = useBeers();
+  const { userList } = UserAuth();
+  const isVotingFinished = async () => {
+    const allHaveFinishedVoting = await userList.every(
+      (u) => u.finishedVoting == true && u.hasVoted == true
+    );
+    console.log(userList);
+    console.log(allHaveFinishedVoting);
+    return allHaveFinishedVoting;
+  };
+  isVotingFinished();
+
   return (
     <div className="py-33 flex flex-col justify-center bg-gray-800 px-8">
       <h1 className="flex items-center justify-center text-white">
