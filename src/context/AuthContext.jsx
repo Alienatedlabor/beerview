@@ -32,6 +32,8 @@ export const AuthContextProvider = ({ children }) => {
         }).then(
           setDoc(doc(db, 'users', user.uid), {
             username: displayName,
+            hasVoted: false,
+            finishedVoting: false,
           })
         );
       }
