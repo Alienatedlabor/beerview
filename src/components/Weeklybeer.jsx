@@ -10,18 +10,22 @@ import Checkboxes from './Checkboxes';
 
 function Weeklybeer() {
   const [open, setOpen] = useState(false);
+  const [votingFinished, setVotingFinished] = useState(false);
 
   const { beers } = useBeers();
   const { userList } = UserAuth();
-  const isVotingFinished = async () => {
-    const allHaveFinishedVoting = await userList.every(
-      (u) => u.finishedVoting == true && u.hasVoted == true
+
+  useEffect(() => {
+    if (userList.length === 0) return;
+
+    const allHaveFinishedVoting = userList.every(
+      (u) => u.finishedVoting === true && u.hasVoted === true
     );
-    console.log(userList);
+
+    setVotingFinished(allHaveFinishedVoting);
     console.log(allHaveFinishedVoting);
-    return allHaveFinishedVoting;
-  };
-  isVotingFinished();
+    console.log(votingFinished);
+  }, [userList]);
 
   return (
     <div className="py-33 flex flex-col justify-center bg-gray-800 px-8">
