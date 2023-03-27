@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { BeerContextProvider } from './context/BeerContext';
+import JudgingPhase from './components/JudgingPhase';
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/judgingphase"
+              element={
+                <ProtectedRoute>
+                  <JudgingPhase />
                 </ProtectedRoute>
               }
             />

@@ -1,5 +1,6 @@
 import { async } from '@firebase/util';
 import { React, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { useBeers } from '../context/BeerContext';
 import AddBeerModal from './AddBeerModal';
@@ -9,6 +10,7 @@ import Checkboxes from './Checkboxes';
 // they have an empty Ratings array object to begin
 
 function Weeklybeer() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [votingFinished, setVotingFinished] = useState(false);
 
@@ -25,7 +27,13 @@ function Weeklybeer() {
     setVotingFinished(allHaveFinishedVoting);
     console.log(allHaveFinishedVoting);
     console.log(votingFinished);
-  }, [userList]);
+  }, [userList, votingFinished]);
+
+  useEffect(() => {
+    if (votingFinished) {
+      navigate('/judgingphase');
+    }
+  }, [votingFinished, navigate]);
 
   return (
     <div className="py-33 flex flex-col justify-center bg-gray-800 px-8">
