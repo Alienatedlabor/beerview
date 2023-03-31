@@ -1,10 +1,14 @@
 import { increment } from 'firebase/firestore';
 import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
+import AddJudgmentModal from './AddJudgmentModal';
+import { useState } from 'react';
 
 const BeerPreview = ({ beer }) => {
   const { user, updateUser } = UserAuth();
   const { deleteBeer, updateBeer } = useBeers();
+  const [open, setOpen] = useState(false);
+
   //optional chaining: ?. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining checks if property exists, short circuits if not
   const hasVoted = beer?.usersWhoHaveVoted?.includes(user.uid);
   const handleVote = () => {
@@ -27,6 +31,8 @@ const BeerPreview = ({ beer }) => {
 
   return (
     <div className="mx-4 my-2 flex flex-col">
+      <AddJudgmentModal open={open} onClose={() => setOpen(false)} />
+
       <h2 className="font-bold text-black">{beer.name}</h2>
       <div className="flex gap-1">
         <label>Brewery: </label>
@@ -73,9 +79,21 @@ const BeerPreview = ({ beer }) => {
           {hasVoted ? "You've already voted!" : 'Vote for this entry'}
         </button>
       )}
+
+      {!beer.hasRating && !beer.upForVote && (
+        <button
+          // disabled={hasRated}
+          onClick={() => setOpen(true)}
+          className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+        >
+          Rate Beer
+          {/* {hasRated ? "You've already rated this beer!" : 'Rate this beer'} */}
+        </button>
+      )}
     </div>
   );
 };
 
 export default BeerPreview;
 // TODO: need a delete that deletes only the current user's rating field.
+// TODO: hasRated on user as array of beer ids they have rated added on rating form submit- array on beer that adds user id, maybe also
