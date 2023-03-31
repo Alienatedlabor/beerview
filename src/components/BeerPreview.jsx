@@ -55,7 +55,7 @@ const BeerPreview = ({ beer }) => {
           </div>
         ))}
 
-      {user.uid == beer.owner && (
+      {user.uid == beer.owner && beer.upForVote && (
         <button
           onClick={() => deleteBeer(beer.id, beer.owner)}
           className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
@@ -64,7 +64,7 @@ const BeerPreview = ({ beer }) => {
         </button>
       )}
 
-      {!beer.hasRating && (
+      {!beer.hasRating && beer.upForVote && (
         <button
           disabled={hasVoted}
           onClick={handleVote}
@@ -78,3 +78,4 @@ const BeerPreview = ({ beer }) => {
 };
 
 export default BeerPreview;
+// TODO: need a delete that deletes only the current user's rating field.
