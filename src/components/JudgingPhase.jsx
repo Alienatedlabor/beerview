@@ -1,3 +1,4 @@
+import { updatePhoneNumber } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
@@ -9,9 +10,9 @@ import BeerPreview from './BeerPreview';
 function JudgingPhase() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [highestVoted, setHighestVoted] = useState();
+  const [highestVoted, setHighestVoted] = useState([]);
 
-  const { beers } = useBeers();
+  const { beers, updateBeer } = useBeers();
   const { userList } = UserAuth();
 
   // TODO: change this for judgingFinished
@@ -22,19 +23,31 @@ function JudgingPhase() {
   // }, [votingFinished, navigate]);
 
   const getHighestVoteCountBeer = () => {
-    if (beers.length === 0) return;
+    let maxVoteCount = 0;
+    let beersWithMaxVoteCount = [];
 
-    const maxVoteCount = Math.max(...beers.map((beer) => beer.voteCount));
-    const beerWithHighestVoteCount = beers.find(
-      (beer) => beer.voteCount === maxVoteCount
-    );
-    console.log(beerWithHighestVoteCount);
-    return beerWithHighestVoteCount;
+    beers.forEach((beer) => {
+      if (beer.voteCount > maxVoteCount) {
+        maxVoteCount = beer.voteCount;
+        beersWithMaxVoteCount = [beer];
+      } else if (beer.voteCount === maxVoteCount) {
+        beersWithMaxVoteCount.push(beer);
+      }
+    });
+
+    return beersWithMaxVoteCount;
   };
+
   useEffect(() => {
     setHighestVoted(getHighestVoteCountBeer);
   }, [beers]);
-
+  useEffect(() => {
+    beers.forEach((beer) =>
+      updateBeer(beer.id, {
+        upForVote: false,
+      })
+    );
+  });
   return (
     <div className="py-33 flex flex-col justify-center bg-gray-800 px-8">
       <h1 className="flex items-center justify-center text-white">
@@ -45,10 +58,10 @@ function JudgingPhase() {
 
       <div className=" flex items-center justify-center  bg-gray-300  p-48">
         <div className="container mx-auto grid grid-cols-5 items-center justify-center gap-4">
-          // TODO: figure out vote threshold and how many beers to rate
-          {beers.map((beer) => (
-            <BeerPreview key={beer.id} beer={getHighestVoteCountBeer()} />
-          ))}
+          {!!highestVoted.length &&
+            highestVoted.map((beer) => (
+              <BeerPreview key={beer.id} beer={beer} />
+            ))}
         </div>
       </div>
 
