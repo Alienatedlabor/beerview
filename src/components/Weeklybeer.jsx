@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
@@ -25,8 +24,6 @@ function Weeklybeer() {
     );
 
     setVotingFinished(allHaveFinishedVoting);
-    console.log(allHaveFinishedVoting);
-    console.log(votingFinished);
   }, [userList, votingFinished]);
 
   useEffect(() => {
