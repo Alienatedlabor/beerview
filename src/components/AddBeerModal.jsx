@@ -18,6 +18,7 @@ const ModalForm = ({ onClose }) => {
       abv: beerABV,
       style: beerStyle,
       hasRating: false,
+      upForRating: false,
       iconurl: '',
       upForVote: true,
       voteCount: 0,

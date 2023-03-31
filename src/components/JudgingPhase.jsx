@@ -40,7 +40,13 @@ function JudgingPhase() {
 
   useEffect(() => {
     setHighestVoted(getHighestVoteCountBeer);
+    highestVoted.forEach((beer) => {
+      updateBeer(beer.id, {
+        upForRating: true,
+      });
+    });
   }, [beers]);
+
   useEffect(() => {
     beers.forEach((beer) =>
       updateBeer(beer.id, {
@@ -64,13 +70,6 @@ function JudgingPhase() {
             ))}
         </div>
       </div>
-
-      <button
-        onClick={() => setOpen(true)}
-        className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600 "
-      >
-        Rate Beer
-      </button>
     </div>
   );
 }
