@@ -53,7 +53,7 @@ function JudgingPhase() {
         upForVote: false,
       })
     );
-  });
+  }, []);
   return (
     <div className="py-33 flex flex-col justify-center bg-gray-800 px-8">
       <h1 className="flex items-center justify-center text-white">
