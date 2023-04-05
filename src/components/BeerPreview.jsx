@@ -31,7 +31,11 @@ const BeerPreview = ({ beer }) => {
 
   return (
     <div className="mx-4 my-2 flex flex-col">
-      <AddJudgmentModal open={open} onClose={() => setOpen(false)} />
+      <AddJudgmentModal
+        beer={beer}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
 
       <h2 className="font-bold text-black">{beer.name}</h2>
       <div className="flex gap-1">
