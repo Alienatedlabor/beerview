@@ -60,8 +60,6 @@ function JudgingPhase() {
         Beers up for rating:
       </h1>
 
-      <AddJudgmentModal open={open} onClose={() => setOpen(false)} />
-
       <div className=" flex items-center justify-center  bg-gray-300  p-48">
         <div className="container mx-auto grid grid-cols-5 items-center justify-center gap-4">
           {!!highestVoted.length &&
