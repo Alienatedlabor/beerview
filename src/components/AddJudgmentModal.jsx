@@ -4,7 +4,7 @@ import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
 import app from '../firebase';
 
-function JudgingForm({ beer }) {
+function JudgingForm({ beer, onClose }) {
   const { updateBeer } = useBeers();
   const { user, updateUser } = UserAuth();
   const [appearanceScore, setAppearanceScore] = useState(0);
@@ -27,7 +27,7 @@ function JudgingForm({ beer }) {
           aftertaste: aftertasteScore,
           drinkabilityScore: drinkabilityScore,
           comment: comment,
-          // ratedBy: user.username,
+          ratedBy: user.displayName,
           uid: user.uid,
         },
       ],
@@ -38,6 +38,7 @@ function JudgingForm({ beer }) {
     setDrinkabilityScore(0);
     setTasteScore(0);
     setComment('');
+    onClose();
   };
 
   return (
