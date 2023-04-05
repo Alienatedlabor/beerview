@@ -42,7 +42,7 @@ function JudgingForm({ beer }) {
 
   return (
     <div className="flex flex-col ">
-      <h2 className="font-bold">Beer: placeholder</h2>
+      <h2 className="font-bold">Beer: {beer.name}</h2>
       <form onSubmit={handleSubmit} className="flex flex-col ">
         <Entry
           value={appearanceScore}
