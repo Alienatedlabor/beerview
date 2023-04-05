@@ -3,13 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { useBeers } from '../context/BeerContext';
-import AddJudgmentModal from './AddJudgmentModal';
-// TODO: BeerPreview vote button stays but is altered to open rating modal for that beer specifically if I go with a many beers rating system
 import BeerPreview from './BeerPreview';
 
 function JudgingPhase() {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [highestVoted, setHighestVoted] = useState([]);
 
   const { beers, updateBeer } = useBeers();
