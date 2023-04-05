@@ -5,9 +5,10 @@ export const Entry = ({
   onChange,
   type,
   disabled,
+  style,
 }) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-2">
       <label className="font-medium text-black">
         {!label ? '' : `${label}`} {!pointValue ? '' : `(${pointValue})`}:
       </label>
@@ -20,6 +21,7 @@ export const Entry = ({
         className="my-1 border text-black"
         placeholder={label}
         disabled={disabled}
+        style={style}
       ></input>
     </div>
   );
