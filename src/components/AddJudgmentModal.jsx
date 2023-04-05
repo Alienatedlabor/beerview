@@ -4,7 +4,7 @@ import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
 import app from '../firebase';
 
-function JudgingForm() {
+function JudgingForm({ beer }) {
   const { updateBeer } = useBeers();
   const { user, updateUser } = UserAuth();
   const [appearanceScore, setAppearanceScore] = useState(0);
@@ -16,7 +16,28 @@ function JudgingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateBeer({});
+    updateBeer(beer.id, {
+      ...beer,
+      ratings: [
+        ...beer.ratings,
+        {
+          appearance: appearanceScore,
+          smell: smellScore,
+          taste: tasteScore,
+          aftertaste: aftertasteScore,
+          drinkabilityScore: drinkabilityScore,
+          comment: comment,
+          // ratedBy: user.username,
+          uid: user.uid,
+        },
+      ],
+    });
+    setAftertasteScore(0);
+    setAppearanceScore(0);
+    setSmellScore(0);
+    setDrinkabilityScore(0);
+    setTasteScore(0);
+    setComment('');
   };
 
   return (
@@ -78,7 +99,7 @@ function JudgingForm() {
     </div>
   );
 }
-export default function AddJudgmentModal({ open, onClose }) {
+export default function AddJudgmentModal({ beer, open, onClose }) {
   return (
     <div className={`fixed inset-0 ${open ? '' : 'pointer-events-none'}`}>
       {/* backdrop */}
@@ -102,7 +123,7 @@ export default function AddJudgmentModal({ open, onClose }) {
             Click to close
           </button>
         </div>
-        <JudgingForm onClose={onClose} />
+        <JudgingForm beer={beer} onClose={onClose} />
       </div>
     </div>
   );
@@ -110,3 +131,4 @@ export default function AddJudgmentModal({ open, onClose }) {
 
 // TODO: get form submitting ratings after voting system is finished
 //TODO: add comments field to beer/rating
+//TODO: make function to total score and store as overallScore for both individual scores and each score averaged.
