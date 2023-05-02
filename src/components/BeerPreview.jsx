@@ -57,7 +57,7 @@ const BeerPreview = ({ beer }) => {
       </h3>
 
       {beer.hasRating &&
-        beer.ratings.map((rate) => (
+        beer.ratings?.map((rate) => (
           <div className="my-2 flex flex-col" key={user.uid + beer.id}>
             <p>Appearance: {rate.appearance}</p>
             <p>Smell: {rate.smell}</p>
