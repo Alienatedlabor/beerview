@@ -34,25 +34,25 @@ function JudgingForm({ beer, onClose }) {
           },
         ],
       });
-      updateBeer(beer.id, {
-        ...beer,
-        usersWhoHaveRated: [user.uid],
-        hasRating: true,
-        ratings: [
-          ...beer.ratings,
-          {
-            appearance: appearanceScore,
-            smell: smellScore,
-            taste: tasteScore,
-            aftertaste: aftertasteScore,
-            drinkabilityScore: drinkabilityScore,
-            comment: comment,
-            ratedBy: user.displayName,
-            uid: user.uid,
-          },
-        ],
-      });
     }
+    updateBeer(beer.id, {
+      ...beer,
+      usersWhoHaveRated: [user.uid],
+      hasRating: true,
+      ratings: [
+        ...beer.ratings,
+        {
+          appearance: appearanceScore,
+          smell: smellScore,
+          taste: tasteScore,
+          aftertaste: aftertasteScore,
+          drinkabilityScore: drinkabilityScore,
+          comment: comment,
+          ratedBy: user.displayName,
+          uid: user.uid,
+        },
+      ],
+    });
 
     // const usersWhoHaveRated = beer.usersWhoHaveRated || [];
     // usersWhoHaveRated.push(user.uid);
@@ -125,6 +125,7 @@ function JudgingForm({ beer, onClose }) {
     </div>
   );
 }
+
 export default function AddJudgmentModal({ beer, open, onClose }) {
   return (
     <div className={`fixed inset-0 ${open ? '' : 'pointer-events-none'}`}>
