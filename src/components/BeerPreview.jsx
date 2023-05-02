@@ -11,6 +11,8 @@ const BeerPreview = ({ beer }) => {
 
   //optional chaining: ?. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining checks if property exists, short circuits if not
   const hasVoted = beer?.usersWhoHaveVoted?.includes(user.uid);
+  console.log(beer.ratings);
+  const hasRated = beer?.usersWhoHaveRated?.includes(user.uid);
   const handleVote = () => {
     if (hasVoted) {
       return;
@@ -55,13 +57,15 @@ const BeerPreview = ({ beer }) => {
       </h3>
 
       {beer.hasRating &&
-        beer.rating.map((rate) => (
-          <div key={beer.id}>
+        beer.ratings.map((rate) => (
+          <div className="my-2 flex flex-col" key={user.uid + beer.id}>
             <p>Appearance: {rate.appearance}</p>
             <p>Smell: {rate.smell}</p>
             <p>Taste: {rate.taste}</p>
             <p>Aftertaste: {rate.aftertaste}</p>
             <p>Drinkability: {rate.drinkability}</p>
+            <p>Comments: {rate.comment}</p>
+            <p>Rated by: {rate.ratedBy}</p>
           </div>
         ))}
 
@@ -84,16 +88,18 @@ const BeerPreview = ({ beer }) => {
         </button>
       )}
 
-      {!beer.hasRating && !beer.upForVote && (
-        <button
-          // disabled={hasRated}
-          onClick={() => setOpen(true)}
-          className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
-        >
-          Rate Beer
-          {/* {hasRated ? "You've already rated this beer!" : 'Rate this beer'} */}
-        </button>
-      )}
+      {
+        // !beer.hasRating  &&
+        beer.upForRating && (
+          <button
+            disabled={hasRated}
+            onClick={() => setOpen(true)}
+            className="my-4 border bg-yellow-500 px-6 py-2 hover:bg-yellow-600"
+          >
+            {hasRated ? "You've already rated this beer!" : 'Rate this beer'}
+          </button>
+        )
+      }
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import { useBeers } from '../context/BeerContext';
 import BeerPreview from './BeerPreview';
+import BeerList from './BeerList';
 
 function JudgingPhase() {
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ function JudgingPhase() {
             ))}
         </div>
       </div>
+      <BeerList />
     </div>
   );
 }

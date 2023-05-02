@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Entry } from './Entry';
 import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
-import app from '../firebase';
 
 function JudgingForm({ beer, onClose }) {
   const { updateBeer } = useBeers();
@@ -16,22 +15,44 @@ function JudgingForm({ beer, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateBeer(beer.id, {
-      ...beer,
-      ratings: [
-        ...beer.ratings,
-        {
-          appearance: appearanceScore,
-          smell: smellScore,
-          taste: tasteScore,
-          aftertaste: aftertasteScore,
-          drinkabilityScore: drinkabilityScore,
-          comment: comment,
-          ratedBy: user.displayName,
-          uid: user.uid,
-        },
-      ],
-    });
+
+    if (!beer.ratings) {
+      updateBeer(beer.id, {
+        ...beer,
+        ratings: [
+          {
+            appearance: appearanceScore,
+            smell: smellScore,
+            taste: tasteScore,
+            aftertaste: aftertasteScore,
+            drinkabilityScore: drinkabilityScore,
+            comment: comment,
+            ratedBy: user.displayName,
+            uid: user.uid,
+          },
+        ],
+      });
+      updateBeer(beer.id, {
+        ...beer,
+        ratings: [
+          ...beer.ratings,
+          {
+            appearance: appearanceScore,
+            smell: smellScore,
+            taste: tasteScore,
+            aftertaste: aftertasteScore,
+            drinkabilityScore: drinkabilityScore,
+            comment: comment,
+            ratedBy: user.displayName,
+            uid: user.uid,
+          },
+        ],
+      });
+    }
+
+    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
+    usersWhoHaveRated.push(user.uid);
+    console.log(usersWhoHaveRated);
     setAftertasteScore(0);
     setAppearanceScore(0);
     setSmellScore(0);
@@ -39,6 +60,10 @@ function JudgingForm({ beer, onClose }) {
     setTasteScore(0);
     setComment('');
     onClose();
+    updateBeer(beer.id, {
+      ...beer,
+      usersWhoHaveRated: [user.uid],
+    });
   };
 
   return (
@@ -131,5 +156,5 @@ export default function AddJudgmentModal({ beer, open, onClose }) {
 }
 
 // TODO: get form submitting ratings after voting system is finished
-//TODO: add comments field to beer/rating
 //TODO: make function to total score and store as overallScore for both individual scores and each score averaged.
+//TODO: form needs min/max properties to prevent voting outside the point value range

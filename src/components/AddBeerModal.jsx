@@ -22,7 +22,7 @@ const ModalForm = ({ onClose }) => {
       iconurl: '',
       upForVote: true,
       voteCount: 0,
-      rating: [
+      ratings: [
         { aftertaste: 0, appearance: 0, drinkability: 0, smell: 0, taste: 0 },
       ],
       addedBy: user.displayName,
