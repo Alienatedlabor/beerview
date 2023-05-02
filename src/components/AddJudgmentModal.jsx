@@ -56,6 +56,10 @@ function JudgingForm({ beer, onClose }) {
     });
 
     usersWhoHaveRated.push(user.uid);
+    updateBeer(beer.id, {
+      usersWhoHaveRated: [usersWhoHaveRated],
+    });
+
     console.log(beer.usersWhoHaveRated);
     setAftertasteScore(0);
     setAppearanceScore(0);
