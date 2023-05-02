@@ -15,9 +15,9 @@ function JudgingForm({ beer, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
+    const usersWhoHaveRatedThisBeer = beer.usersWhoHaveRated || [];
     console.log(usersWhoHaveRated);
-    if (usersWhoHaveRated.includes(user.uid)) return;
+    if (usersWhoHaveRatedThisBeer.includes(user.uid)) return;
 
     if (!beer.ratings || beer.ratings.length === 0) {
       updateBeer(beer.id, {
