@@ -16,9 +16,10 @@ function JudgingForm({ beer, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!beer.ratings) {
+    if (!beer.ratings || beer.ratings.length === 0) {
       updateBeer(beer.id, {
         ...beer,
+        usersWhoHaveRated: [user.uid],
         ratings: [
           {
             appearance: appearanceScore,
@@ -34,6 +35,7 @@ function JudgingForm({ beer, onClose }) {
       });
       updateBeer(beer.id, {
         ...beer,
+        usersWhoHaveRated: [user.uid],
         ratings: [
           ...beer.ratings,
           {
@@ -50,9 +52,9 @@ function JudgingForm({ beer, onClose }) {
       });
     }
 
-    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
-    usersWhoHaveRated.push(user.uid);
-    console.log(usersWhoHaveRated);
+    // const usersWhoHaveRated = beer.usersWhoHaveRated || [];
+    // usersWhoHaveRated.push(user.uid);
+    console.log(beer.usersWhoHaveRated);
     setAftertasteScore(0);
     setAppearanceScore(0);
     setSmellScore(0);
@@ -60,10 +62,6 @@ function JudgingForm({ beer, onClose }) {
     setTasteScore(0);
     setComment('');
     onClose();
-    updateBeer(beer.id, {
-      ...beer,
-      usersWhoHaveRated: [user.uid],
-    });
   };
 
   return (
