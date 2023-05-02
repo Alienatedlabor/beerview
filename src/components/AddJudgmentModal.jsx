@@ -37,7 +37,6 @@ function JudgingForm({ beer, onClose }) {
     }
     updateBeer(beer.id, {
       ...beer,
-      usersWhoHaveRated: [user.uid],
       hasRating: true,
       ratings: [
         ...beer.ratings,
@@ -54,8 +53,8 @@ function JudgingForm({ beer, onClose }) {
       ],
     });
 
-    // const usersWhoHaveRated = beer.usersWhoHaveRated || [];
-    // usersWhoHaveRated.push(user.uid);
+    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
+    usersWhoHaveRated.push(user.uid);
     console.log(beer.usersWhoHaveRated);
     setAftertasteScore(0);
     setAppearanceScore(0);
@@ -156,6 +155,6 @@ export default function AddJudgmentModal({ beer, open, onClose }) {
   );
 }
 
-// TODO: get form submitting ratings after voting system is finished
+// TODO: usersWhoHaveRated is being overwritten with each rating, fix that. either spread or find another way- knoten mentioned arrayunion arrayremove
 //TODO: make function to total score and store as overallScore for both individual scores and each score averaged.
 //TODO: form needs min/max properties to prevent voting outside the point value range
