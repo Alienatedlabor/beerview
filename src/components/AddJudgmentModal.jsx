@@ -20,6 +20,7 @@ function JudgingForm({ beer, onClose }) {
       updateBeer(beer.id, {
         ...beer,
         usersWhoHaveRated: [user.uid],
+        hasRating: true,
         ratings: [
           {
             appearance: appearanceScore,
@@ -36,6 +37,7 @@ function JudgingForm({ beer, onClose }) {
       updateBeer(beer.id, {
         ...beer,
         usersWhoHaveRated: [user.uid],
+        hasRating: true,
         ratings: [
           ...beer.ratings,
           {
