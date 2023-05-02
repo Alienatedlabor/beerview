@@ -15,6 +15,8 @@ function JudgingForm({ beer, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
+    if (usersWhoHaveRated.includes(user.uid)) return;
 
     if (!beer.ratings || beer.ratings.length === 0) {
       updateBeer(beer.id, {
@@ -53,7 +55,6 @@ function JudgingForm({ beer, onClose }) {
       ],
     });
 
-    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
     usersWhoHaveRated.push(user.uid);
     console.log(beer.usersWhoHaveRated);
     setAftertasteScore(0);
