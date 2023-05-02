@@ -15,33 +15,16 @@ function JudgingForm({ beer, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const usersWhoHaveRated = beer.usersWhoHaveRated || [];
-    if (usersWhoHaveRated.includes(user.uid)) return;
 
-    if (!beer.ratings || beer.ratings.length === 0) {
-      updateBeer(beer.id, {
-        ...beer,
-        usersWhoHaveRated: [user.uid],
-        hasRating: true,
-        ratings: [
-          {
-            appearance: appearanceScore,
-            smell: smellScore,
-            taste: tasteScore,
-            aftertaste: aftertasteScore,
-            drinkabilityScore: drinkabilityScore,
-            comment: comment,
-            ratedBy: user.displayName,
-            uid: user.uid,
-          },
-        ],
-      });
-    }
+    if (beer.usersWhoHaveRated?.includes(user.uid)) return;
+
     updateBeer(beer.id, {
       ...beer,
       hasRating: true,
+      usersWhoHaveRated: [...(beer.usersWhoHaveRated || []), user.uid],
+
       ratings: [
-        ...beer.ratings,
+        ...(beer.ratings || []),
         {
           appearance: appearanceScore,
           smell: smellScore,
@@ -55,7 +38,6 @@ function JudgingForm({ beer, onClose }) {
       ],
     });
 
-    usersWhoHaveRated.push(user.uid);
     console.log(beer.usersWhoHaveRated);
     setAftertasteScore(0);
     setAppearanceScore(0);
