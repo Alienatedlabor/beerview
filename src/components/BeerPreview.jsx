@@ -3,6 +3,7 @@ import { useBeers } from '../context/BeerContext';
 import { UserAuth } from '../context/AuthContext';
 import AddJudgmentModal from './AddJudgmentModal';
 import { useState } from 'react';
+import RatingPreview from './RatingPreview';
 
 const BeerPreview = ({ beer }) => {
   const { user, updateUser } = UserAuth();
@@ -55,6 +56,8 @@ const BeerPreview = ({ beer }) => {
       <h3 className="font-bold">
         {beer.upForVote === true ? `Votes: ${beer.voteCount}` : ''}
       </h3>
+
+      <RatingPreview ratings={beer.ratings} />
 
       {beer.hasRating &&
         beer.ratings?.map((rate) => (
