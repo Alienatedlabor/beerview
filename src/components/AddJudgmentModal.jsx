@@ -138,6 +138,5 @@ export default function AddJudgmentModal({ beer, open, onClose }) {
   );
 }
 
-// TODO: usersWhoHaveRated is being overwritten with each rating, fix that. either spread or find another way- knoten mentioned arrayunion arrayremove
 //TODO: make function to total score and store as overallScore for both individual scores and each score averaged.
 //TODO: form needs min/max properties to prevent voting outside the point value range
